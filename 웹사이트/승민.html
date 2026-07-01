@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <link rel ="stylesheet" href="/static/승민.css">
+    <title>Story릴레이
+    </title>
+</head>
+<body>
+    <div id="logg">
+    <h1>Story 릴레이</h1>
+    <div id="log">
+        <p id="login">로그인</p>
+        <p id="account">비회원</p>
+    </div>
+    </div>
+    <div id="big">
+        <div id="add">
+        <input type="text" placeholder="이야기의 제목을 입력하세요." id="title">
+        <button onclick="new1()">릴레이 추가</button>
+        </div>
+        <p></p>
+        <div id="ad"></div>
+        <button id="drop" onclick="drop()">초기화</button>
+
+    </div>
+    <div id="context"></div>
+    <div id="ba">
+    <div id="input">
+    <input id="text" class="ni"></input>
+    <button onclick="su_bmit()" class="ni">등록</button>
+    </div>
+    <button id="back" onclick="back()">돌아가기</button>
+    <button id="delete" onclick="Delete()">삭제하기</button>
+    <button id="music-ctrl-btn" onclick="toggleMusic()">
+    <span id="btn-icon">▶️</span>
+    </button>
+
+    <div id="hidden-player"></div>
+    <script src="/static/승민.js"></script>
+    
+    
+</body>
+</html>

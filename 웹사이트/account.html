@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            gap: 40px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            width: 300px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background-color: #357abd;
+        }
+        
+        input:focus {
+            border-color: #4a90e2;
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>회원가입</h2>
+        <input type="text" id="reg-id" placeholder="아이디" autocomplete="new-password">
+        <input type="password" id="reg-pw" placeholder="비밀번호" autocomplete="new-password">
+        <input type="text" id="reg-name" placeholder="이름" autocomplete="new-password">
+        <p id="log">로그인으로 돌아가기</p> <p id="first">비회원으로 이용하기</p>
+        <button onclick="signup()">가입하기</button>
+    </div>
+<script>
+            const BACKEND_URL = 'https://laziness-chapped-laziness.ngrok-free.dev';
+
+        // 1. 회원가입 기능
+        async function signup() {
+            const userId = document.getElementById('reg-id').value;
+            const password = document.getElementById('reg-pw').value;
+            const name = document.getElementById('reg-name').value;
+
+            if (!userId || !password || !name) {
+                alert("모든 빈칸을 채워주세요.");
+                return;
+            }
+
+            try {
+                const res = await fetch(`${BACKEND_URL}/signup`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ user_id: userId, password: password, name: name })
+                });
+
+                const data = await res.json();
+                if (res.ok) {
+                    alert(data.message);
+                    // 가입 성공 시 입력창 초기화
+                    document.getElementById('reg-id').value = '';
+                    document.getElementById('reg-pw').value = '';
+                    document.getElementById('reg-name').value = '';
+                    alert("로그인 화면으로 이동합니다.")
+                    window.location.href = "/bssm";
+
+                } else {
+                    alert("회원가입 실패: " + data.error);
+                }
+            } catch (error) {
+                alert("서버와 연결할 수 없습니다. 백엔드가 켜져 있는지 확인하세요.");
+            }
+        }
+
+        document.getElementById("log").onclick=function(){
+            window.location.href = "/bssm";
+
+        }
+
+        document.getElementById("first").onclick=function(){
+            window.location.href = "/";
+
+        }
+</script>
+</body>
+</html>

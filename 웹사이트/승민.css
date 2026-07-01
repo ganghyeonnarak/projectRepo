@@ -1,0 +1,111 @@
+#ad{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding-left:50px ;
+}
+
+
+
+#ad > div {
+
+        width: 150px;          
+        height: 100px;        
+        background-color: white; 
+        border: 1px solid black;
+        border-radius: 10px; 
+        padding: 10px;
+        box-sizing: border-box; 
+        
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+    }
+
+#input{
+    display: none;
+}
+
+#back{
+    display: none;
+}
+
+#delete{
+    display: none;
+}
+
+#logg{
+    display: flex;
+    gap: 750px;
+    font-size: 20px;
+    padding-left: 100px;
+}
+
+#log{
+    display: flex;
+    gap: 50px;
+    font-size: 20px;
+    padding-left: 100px;
+    padding-top: 20px;
+
+}
+body{
+}
+h1{
+    font-size: 50px;
+}
+#add{
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    display: flex;
+    gap: 50px;
+    background-color: skyblue;
+}
+
+input {
+    width: 500px;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 14px;
+
+        }
+
+button {
+   
+    padding: 12px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+   font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+        }
+#drop{
+    display: none;
+    background-color: red;
+}
+.COM{
+    display:flex;
+    border: 5px solid #4a90e2;
+    flex-direction: column;     /* 작성자와 내용을 위아래로 배치 */
+    gap: 4px;
+    padding: 12px 0;
+    border-radius: 5px;
+    width: 600px;
+}
+
+.cla{
+    padding-left: 100px;
+    font-size: larger;
+}
+
+#ba{
+    padding-left: 100px;
+}

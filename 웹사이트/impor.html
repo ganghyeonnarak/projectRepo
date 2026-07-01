@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=device-width, initial-scale=1.0">
+    <title>로그인 & 회원가입</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            gap: 40px;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            width: 300px;
+        }
+        h2 {
+            margin-top: 0;
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        input:focus {
+            border-color: #4a90e2;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background-color: #357abd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>로그인</h2>
+        <input type="text" id="login-id" placeholder="아이디" >
+        <input type="password" id="login-pw" placeholder="비밀번호">
+        <p id="naccount">회원가입</p>
+        <button onclick="login()">로그인하기</button>
+    </div>
+
+    <script>
+        // 🛠️ 내 백엔드 서버 주소 (맥 에어플레이 때문에 5001로 바꿨다면 여기를 5001로 수정!)
+        const BACKEND_URL = 'https://laziness-chapped-laziness.ngrok-free.dev';
+        document.getElementById("naccount").onclick=function(){
+            window.location.href = "/log";
+
+        }
+        // 2. 로그인 기능
+        async function login() {
+            const userId = document.getElementById('login-id').value;
+            const password = document.getElementById('login-pw').value;
+
+            if (!userId || !password) {
+                alert("아이디와 비밀번호를 입력해주세요.");
+                return;
+            }
+
+            try {
+                const res = await fetch(`${BACKEND_URL}/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ user_id: userId, password: password })
+                });
+
+                const data = await res.json();
+                if (res.ok) {
+                    alert("로그인 성공!");
+                    // 브라우저 저장소에 이름 저장 후 페이지 이동
+                    sessionStorage.setItem('userName', data.user.name);
+                    sessionStorage.setItem('userId', data.user.user_id);
+                    window.location.href = '/';
+                } else {
+                    alert("로그인 실패: " + data.error);
+                }
+            } catch (error) {
+                alert("서버와 연결할 수 없습니다. 백엔드가 켜져 있는지 확인하세요.");
+            }
+        }
+    </script>
+</body>
+</html>
